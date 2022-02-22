@@ -5,12 +5,10 @@ const membersData = require("./absences_data/members.json");
 let port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-  res.send("");
-});
-
-app.get("/absence-manager-api", (req, res) => {
-  const data = absencesData.map((a) => ({ ...a, ...membersData.find((b) => b.userId === a.userId) }));
-
+  const data = absencesData.map((a) => ({
+    ...a,
+    ...membersData.find((b) => b.userId === a.userId),
+  }));
   res.send(data);
 });
 
